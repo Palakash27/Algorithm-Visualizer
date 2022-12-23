@@ -1,0 +1,44 @@
+.array-bars-container {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2%;
+}
+
+.array-bar {
+    display: inline-block;
+    width: 20px;
+    background-color: blue;
+    transition: height 0.3s linear;
+    margin: 0 1px;
+}
+
+.array-bar .highlight {
+    animation: highlight 0.3s linear;
+    background-color: yellow;
+}
+
+@media (max-width: 900px) {
+    .array-bar {
+        width: 8px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .array-bar {
+        width: 5px !important;
+    }
+}
+
+@keyframes highlight {
+    0% {
+        background-color: blue;
+    }
+    50% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: blue;
+    }
+}

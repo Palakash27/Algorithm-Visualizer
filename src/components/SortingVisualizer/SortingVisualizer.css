@@ -1,0 +1,12 @@
+.sorting-visualizer .sorted {
+    background-color: green;
+}
+
+.sorting-visualizer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0px 20px;
+}

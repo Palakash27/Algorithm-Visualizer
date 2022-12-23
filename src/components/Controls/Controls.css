@@ -1,0 +1,64 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.array-length-options,
+.speed-options {
+    display: flex;
+    align-items: center;
+}
+
+.array-length-option,
+.speed-option {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.array-length-option:hover,
+.speed-option:hover {
+    background-color: #444;
+}
+
+.array-length-option:disabled,
+.speed-option:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.algorithm-select {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.sort-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.sort-button:hover {
+    background-color: #444;
+}
