@@ -130,8 +130,34 @@ const Controls = ({ array, setArray }) => {
                         </p>
                     </div>
                 );
+            case "heapSort":
+                return (
+                    <div className="quick-facts">
+                        <p>
+                            <strong>Heap Sort</strong> is a comparison-based
+                            sorting algorithm that uses a binary heap data
+                            structure. It has a time complexity of O(n log n).
+                        </p>
+                        <p>
+                            In heap sort, the array is first transformed into a
+                            max heap (or min heap, depending on the order in
+                            which the elements need to be sorted). The root
+                            element of the heap (which is the largest or
+                            smallest element in the heap) is then removed and
+                            placed at the end of the sorted array. This process
+                            is repeated until the heap is empty.
+                        </p>
+                        <p>
+                            Heap sort is an in-place sorting algorithm, which
+                            means it does not require any additional space to
+                            sort the elements. It is also not a stable sort,
+                            which means the order of elements with equal values
+                            may be changed.
+                        </p>
+                    </div>
+                );
             default:
-                return null;
+                break;
         }
     };
 
@@ -191,6 +217,9 @@ const Controls = ({ array, setArray }) => {
                 break;
             case "mergeSort":
                 await mergeSort(array);
+                break;
+            case "heapSort":
+                await heapSort();
                 break;
             default:
                 break;
@@ -373,10 +402,101 @@ const Controls = ({ array, setArray }) => {
 
     // Function to sort the array using merge sort
     const mergeSort = async (array) => {
-        // Remove the sorted class from the bars
+        if (array.length <= 1) {
+            return array;
+        }
+
+        const middle = Math.floor(array.length / 2);
+        const left = array.slice(0, middle);
+        const right = array.slice(middle);
+
+        return await merge(await mergeSort(left), await mergeSort(right));
+    };
+
+    // Function to merge the array
+    const merge = async (left, right) => {
+        let resultArray = [],
+            leftIndex = 0,
+            rightIndex = 0;
+
+        while (leftIndex < left.length && rightIndex < right.length) {
+            // Highlight the bars being compared
+            document
+                .querySelectorAll(".array-bar")
+                [leftIndex].classList.add("highlight");
+            document
+                .querySelectorAll(".array-bar")
+                [rightIndex].classList.add("highlight");
+
+            await new Promise((resolve) => setTimeout(resolve, speed));
+            if (left[leftIndex] < right[rightIndex]) {
+                resultArray.push(left[leftIndex]);
+                leftIndex++;
+            } else {
+                resultArray.push(right[rightIndex]);
+                rightIndex++;
+            }
+            // Remove the highlight from the bars
+            document
+                .querySelectorAll(".array-bar")
+                [leftIndex].classList.remove("highlight");
+            document
+                .querySelectorAll(".array-bar")
+                [rightIndex].classList.remove("highlight");
+        }
+
+        return resultArray
+            .concat(left.slice(leftIndex))
+            .concat(right.slice(rightIndex));
+    };
+
+    // Function to sort the array using heap sort
+    const heapSort = async () => {
+        let n = array.length;
+
+        for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+            await heapify(array, n, i);
+        }
+
+        for (let i = n - 1; i > 0; i--) {
+            // Swap the values
+            [array[0], array[i]] = [array[i], array[0]];
+            // Update the state with the sorted array
+            setArray([...array]);
+
+            await new Promise((resolve) => setTimeout(resolve, speed));
+            await heapify(array, i, 0);
+        }
+
+        // Add the sorted class from the bars
         document.querySelectorAll(".array-bar").forEach((bar) => {
-            bar.classList.remove("sorted");
+            bar.classList.add("sorted");
         });
+    };
+
+    // Function to heapify the array
+    const heapify = async (array, n, i) => {
+        let largest = i;
+        let left = 2 * i + 1;
+        let right = 2 * i + 2;
+
+        if (left < n && array[left] > array[largest]) {
+            largest = left;
+        }
+
+        if (right < n && array[right] > array[largest]) {
+            largest = right;
+        }
+
+        if (largest !== i) {
+            // Swap the values
+            [array[i], array[largest]] = [array[largest], array[i]];
+            // Update the state with the sorted array
+            setArray([...array]);
+
+            await new Promise((resolve) => setTimeout(resolve, speed));
+            await heapify(array, n, largest);
+        }
     };
 
     return (

@@ -14,6 +14,7 @@ export default function ButtonsGroup({
             <div className={containerClassName}>
                 {Object.keys(buttonTexts).map((btn, index) => (
                     <Button
+                        key={`${buttonClassName}-${index}`}
                         OnClick={() => onClick(buttonTexts[btn].speed)}
                         ClassName={buttonClassName}
                         Disabled={
