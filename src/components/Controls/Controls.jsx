@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
+import ChooseAlgorithm from "../ChooseAlgorithm/ChooseAlgorithm";
+import ChooseSpeed from "../ChooseSpeed/ChooseSpeed";
+import SampleData from "../SampleData/SampleData";
 import "./Controls.css";
 
 const Controls = ({ array, setArray }) => {
     const [speed, setSpeed] = useState(250);
     const [algorithm, setAlgorithm] = useState("bubbleSort");
     const [isSorting, setIsSorting] = useState(false);
-
     const [arrayLengthActiveButton, setArrayLengthActiveButton] =
         useState(null);
     const [speedActiveButton, setSpeedActiveButton] = useState(null);
+    const [timeConsumed, setTimeConsumed] = useState(null);
 
     const handleSpeedOptionClick = (speed) => {
         setSpeed(speed);
@@ -26,7 +29,7 @@ const Controls = ({ array, setArray }) => {
         switch (algorithm) {
             case "bubbleSort":
                 return (
-                    <div className="quick-facts">
+                    <div className="facts">
                         <p>
                             Bubble sort is a simple sorting algorithm that
                             compares adjacent elements and swaps their positions
@@ -45,7 +48,7 @@ const Controls = ({ array, setArray }) => {
                 );
             case "selectionSort":
                 return (
-                    <div className="quick-facts">
+                    <div className="facts">
                         <p>
                             Selection sort is a simple sorting algorithm that
                             repeatedly selects the minimum element from the
@@ -65,7 +68,7 @@ const Controls = ({ array, setArray }) => {
                 );
             case "insertionSort":
                 return (
-                    <div className="quick-facts">
+                    <div className="facts">
                         <p>
                             Insertion sort is a simple sorting algorithm that
                             repeatedly selects an element and inserts it into
@@ -85,7 +88,7 @@ const Controls = ({ array, setArray }) => {
                 );
             case "quickSort":
                 return (
-                    <div className="quick-facts">
+                    <div className="facts">
                         <p>
                             Quick sort is a divide and conquer algorithm that
                             selects a pivot element and partition the array into
@@ -104,7 +107,7 @@ const Controls = ({ array, setArray }) => {
                 );
             case "mergeSort":
                 return (
-                    <div className="quick-facts">
+                    <div className="facts">
                         <p>
                             Merge sort is a divide and conquer algorithm that
                             divides the array into two halves, sorts each half,
@@ -162,6 +165,8 @@ const Controls = ({ array, setArray }) => {
     };
 
     const sort = async () => {
+        const startTime = performance.now();
+
         switch (algorithm) {
             case "bubbleSort":
                 await bubbleSort();
@@ -181,6 +186,9 @@ const Controls = ({ array, setArray }) => {
             default:
                 break;
         }
+
+        const endTime = performance.now();
+        setTimeConsumed((endTime - startTime).toFixed(2) / 1000);
     };
 
     // Function to sort the array using bubble sort
@@ -313,98 +321,22 @@ const Controls = ({ array, setArray }) => {
 
     return (
         <div className="controls-container">
-            <h2>Sample Data</h2>
-            <div className="controls">
-                <div className="array-length-options">
-                    <button
-                        onClick={() => handleArrayLengthOptionClick(10)}
-                        className="array-length-option"
-                        disabled={arrayLengthActiveButton === 10 || isSorting}
-                    >
-                        10
-                    </button>
-                    <button
-                        onClick={() => handleArrayLengthOptionClick(20)}
-                        className="array-length-option"
-                        disabled={arrayLengthActiveButton === 20 || isSorting}
-                    >
-                        20
-                    </button>
-                    <button
-                        onClick={() => handleArrayLengthOptionClick(35)}
-                        className="array-length-option"
-                        disabled={arrayLengthActiveButton === 35 || isSorting}
-                    >
-                        35
-                    </button>
-                    <button
-                        onClick={() => handleArrayLengthOptionClick(50)}
-                        className="array-length-option"
-                        disabled={arrayLengthActiveButton === 50 || isSorting}
-                    >
-                        50
-                    </button>
-                </div>
-            </div>
-            <hr />
-            <h2>Choose Speed</h2>
-            <div className="controls">
-                <div className="speed-options">
-                    <button
-                        onClick={() => handleSpeedOptionClick(1000)}
-                        className="speed-option"
-                        disabled={speedActiveButton === 1000 || isSorting}
-                    >
-                        Sloooow
-                    </button>
-                    <button
-                        onClick={() => handleSpeedOptionClick(500)}
-                        className="speed-option"
-                        disabled={speedActiveButton === 500 || isSorting}
-                    >
-                        Medium
-                    </button>
-                    <button
-                        onClick={() => handleSpeedOptionClick(100)}
-                        className="speed-option"
-                        disabled={speedActiveButton === 100 || isSorting}
-                    >
-                        Fast
-                    </button>
-                    <button
-                        onClick={() => handleSpeedOptionClick(1)}
-                        className="speed-option"
-                        disabled={speedActiveButton === 1 || isSorting}
-                    >
-                        Flash
-                    </button>
-                </div>
-            </div>
-            <hr />
-            <h2>Choose Algorithm</h2>
-            <div>
-                <select
-                    value={algorithm}
-                    onChange={handleAlgorithmChange}
-                    className="algorithm-select"
-                    disabled={isSorting}
-                >
-                    <option value="bubbleSort">Bubble Sort</option>
-                    <option value="selectionSort">Selection Sort</option>
-                    <option value="insertionSort">Insertion Sort</option>
-                    <option value="quickSort">Quick Sort</option>
-                    <option value="mergeSort">Merge Sort</option>
-                </select>
-                <div>
-                    <i>
-                        <h4>Quick Facts</h4>
-                        {renderQuickFacts()}
-                    </i>
-                </div>
-            </div>
-
-            <hr />
-
+            <SampleData
+                handleArrayLengthOptionClick={handleArrayLengthOptionClick}
+                arrayLengthActiveButton={arrayLengthActiveButton}
+                isSorting={isSorting}
+            />
+            <ChooseSpeed
+                handleSpeedOptionClick={handleSpeedOptionClick}
+                speedActiveButton={speedActiveButton}
+                isSorting={isSorting}
+            />
+            <ChooseAlgorithm
+                algorithm={algorithm}
+                handleAlgorithmChange={handleAlgorithmChange}
+                isSorting={isSorting}
+                renderQuickFacts={renderQuickFacts}
+            />
             <div className="controls">
                 <button
                     onClick={handleSortClick}
@@ -413,6 +345,9 @@ const Controls = ({ array, setArray }) => {
                 >
                     {isSorting ? "Sorting..." : "Sort"}
                 </button>
+                {timeConsumed !== null ? (
+                    <p>Time consumed: {timeConsumed}s</p>
+                ) : null}
             </div>
         </div>
     );

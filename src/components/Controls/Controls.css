@@ -1,3 +1,13 @@
+.controls-container {
+    padding: 2%;
+}
+
+@media (min-width: 1160px) {
+    .controls-container {
+        width: 1150px;
+    }
+}
+
 .controls {
     display: flex;
     align-items: center;
