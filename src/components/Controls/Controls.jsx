@@ -193,7 +193,7 @@ const Controls = ({ array, setArray }) => {
         }
 
         const endTime = performance.now();
-        setTimeConsumed((endTime - startTime).toFixed(2) / 1000);
+        setTimeConsumed(((endTime - startTime) / 1000).toFixed(2));
     };
 
     // Function to sort the array using bubble sort

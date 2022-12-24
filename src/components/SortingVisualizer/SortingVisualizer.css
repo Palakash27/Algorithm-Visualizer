@@ -12,18 +12,12 @@
 }
 
 .sorting-visualizer .highlight {
-    animation: highlight 0.3s linear;
+    animation: highlight 0s linear;
     background-color: yellow;
 }
 
 @keyframes highlight {
     0% {
-        background-color: blue;
-    }
-    50% {
-        background-color: yellow;
-    }
-    100% {
         background-color: blue;
     }
 }
