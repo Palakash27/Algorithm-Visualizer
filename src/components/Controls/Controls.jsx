@@ -25,8 +25,8 @@ const Controls = ({ array, setArray }) => {
     };
 
     const handleResetClick = () => {
-        handleArrayLengthOptionClick(20);
-        handleSpeedOptionClick(500);
+        handleArrayLengthOptionClick(array.length);
+        handleSpeedOptionClick(speed);
     };
 
     const renderQuickFacts = () => {
