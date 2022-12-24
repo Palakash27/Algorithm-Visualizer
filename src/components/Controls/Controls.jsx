@@ -20,9 +20,13 @@ const Controls = ({ array, setArray }) => {
 
     const handleSortClick = async () => {
         setIsSorting(true);
-        console.log(`setting isSorting to ${isSorting}`);
         await sort();
         setIsSorting(false);
+    };
+
+    const handleResetClick = () => {
+        handleArrayLengthOptionClick(20);
+        handleSpeedOptionClick(500);
     };
 
     const renderQuickFacts = () => {
@@ -338,13 +342,22 @@ const Controls = ({ array, setArray }) => {
                 renderQuickFacts={renderQuickFacts}
             />
             <div className="controls">
-                <button
-                    onClick={handleSortClick}
-                    className="sort-button"
-                    disabled={isSorting}
-                >
-                    {isSorting ? "Sorting..." : "Sort"}
-                </button>
+                <div>
+                    <button
+                        onClick={handleSortClick}
+                        className="sort-button"
+                        disabled={isSorting}
+                    >
+                        {isSorting ? "Sorting..." : "Sort"}
+                    </button>
+                    <button
+                        onClick={handleResetClick}
+                        className="reset-button"
+                        disabled={isSorting}
+                    >
+                        Reset
+                    </button>
+                </div>
                 {timeConsumed !== null ? (
                     <p>Time consumed: {timeConsumed}s</p>
                 ) : null}

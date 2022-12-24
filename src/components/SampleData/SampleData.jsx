@@ -20,6 +20,7 @@ export default function SampleData({
                     btn2: { text: "20", speed: 20 },
                     btn3: { text: "35", speed: 35 },
                     btn4: { text: "50", speed: 50 },
+                    btn5: { text: "70", speed: 70 },
                 }}
             />
             <hr />

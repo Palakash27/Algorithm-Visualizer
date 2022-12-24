@@ -33,7 +33,7 @@
     font-size: 14px;
     margin-right: 10px;
 }
-
+.reset-button:hover,
 .sort-button:hover,
 .array-length-option:hover,
 .speed-option:hover {
@@ -42,6 +42,7 @@
 
 .algorithm-select:disabled,
 .sort-button:disabled,
+.reset-button:disabled,
 .array-length-option:disabled,
 .speed-option:disabled {
     background-color: #ccc;
@@ -61,7 +62,8 @@
     margin-right: 10px;
 }
 
-.sort-button {
+.sort-button,
+.reset-button {
     background-color: #333;
     color: #fff;
     border: none;
@@ -70,4 +72,7 @@
     padding: 10px 20px;
     border-radius: 4px;
     font-size: 14px;
+}
+.reset-button {
+    margin-left: 10px;
 }
