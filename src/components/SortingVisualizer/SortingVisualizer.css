@@ -1,7 +1,3 @@
-.sorting-visualizer .sorted {
-    background-color: green;
-}
-
 .sorting-visualizer {
     display: flex;
     flex-direction: column;
@@ -9,4 +5,25 @@
     align-items: center;
     height: 100%;
     margin: 0px 20px;
+}
+
+.sorting-visualizer .sorted {
+    background-color: green;
+}
+
+.sorting-visualizer .highlight {
+    animation: highlight 0.3s linear;
+    background-color: yellow;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: blue;
+    }
+    50% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: blue;
+    }
 }

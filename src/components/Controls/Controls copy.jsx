@@ -15,13 +15,6 @@ const Controls = ({ array, setArray }) => {
         setSpeedActiveButton(speed);
     };
 
-    const handleSortClick = async () => {
-        setIsSorting(true);
-        console.log(`setting isSorting to ${isSorting}`);
-        await sort();
-        setIsSorting(false);
-    };
-
     const renderQuickFacts = () => {
         switch (algorithm) {
             case "bubbleSort":
@@ -161,30 +154,8 @@ const Controls = ({ array, setArray }) => {
         setAlgorithm(e.target.value);
     };
 
-    const sort = async () => {
-        switch (algorithm) {
-            case "bubbleSort":
-                await bubbleSort();
-                break;
-            case "selectionSort":
-                await selectionSort();
-                break;
-            case "insertionSort":
-                await insertionSort();
-                break;
-            case "quickSort":
-                await quickSort(array, 0, array.length - 1);
-                break;
-            case "mergeSort":
-                await mergeSort(array);
-                break;
-            default:
-                break;
-        }
-    };
-
     // Function to sort the array using bubble sort
-    const bubbleSort = async () => {
+    const bubbleSort = useCallback(async () => {
         let isSorted = false;
         while (!isSorted) {
             isSorted = true;
@@ -221,10 +192,10 @@ const Controls = ({ array, setArray }) => {
         document.querySelectorAll(".array-bar").forEach((bar) => {
             bar.classList.add("sorted");
         });
-    };
+    }, [array, setArray, speed]);
 
     // Function to sort the array using selection sort
-    const selectionSort = async () => {
+    const selectionSort = useCallback(async () => {
         for (let i = 0; i < array.length - 1; i++) {
             let minIndex = i;
             for (let j = i + 1; j < array.length; j++) {
@@ -256,10 +227,10 @@ const Controls = ({ array, setArray }) => {
         document.querySelectorAll(".array-bar").forEach((bar) => {
             bar.classList.add("sorted");
         });
-    };
+    }, [array, setArray, speed]);
 
     // Function to sort the array using insertion sort
-    const insertionSort = async () => {
+    const insertionSort = useCallback(async () => {
         for (let i = 1; i < array.length; i++) {
             let j = i;
             while (j > 0 && array[j] < array[j - 1]) {
@@ -293,23 +264,66 @@ const Controls = ({ array, setArray }) => {
         document.querySelectorAll(".array-bar").forEach((bar) => {
             bar.classList.add("sorted");
         });
-    };
+    }, [array, setArray, speed]);
 
     // Function to sort the array using quick sort
-    const quickSort = async (array, start, end) => {
+    const quickSort = useCallback(async (array, start, end) => {
         // Remove the sorted class from the bars
         document.querySelectorAll(".array-bar").forEach((bar) => {
             bar.classList.remove("sorted");
         });
-    };
+    }, []);
 
     // Function to sort the array using merge sort
-    const mergeSort = async (array) => {
+    const mergeSort = useCallback(async (array) => {
         // Remove the sorted class from the bars
         document.querySelectorAll(".array-bar").forEach((bar) => {
             bar.classList.remove("sorted");
         });
-    };
+    }, []);
+
+    const sort = useCallback(async () => {
+        switch (algorithm) {
+            case "bubbleSort":
+                await bubbleSort();
+                break;
+            case "selectionSort":
+                await selectionSort();
+                break;
+            case "insertionSort":
+                await insertionSort();
+                break;
+            case "quickSort":
+                await quickSort(array, 0, array.length - 1);
+                break;
+            case "mergeSort":
+                await mergeSort(array);
+                break;
+            default:
+                break;
+        }
+    }, [
+        algorithm,
+        array,
+        bubbleSort,
+        insertionSort,
+        selectionSort,
+        mergeSort,
+        quickSort,
+    ]);
+
+    useEffect(() => {
+        const checkSorting = async () => {
+            if (isSorting) {
+                console.log(`Sorting...${isSorting}`);
+                await sort();
+                setIsSorting(false);
+                console.log(`Sorting done...${isSorting}`);
+            }
+        };
+
+        checkSorting();
+    }, [isSorting]);
 
     return (
         <div className="controls-container">
@@ -407,11 +421,10 @@ const Controls = ({ array, setArray }) => {
 
             <div className="controls">
                 <button
-                    onClick={handleSortClick}
+                    onClick={() => setIsSorting(true)}
                     className="sort-button"
-                    disabled={isSorting}
                 >
-                    {isSorting ? "Sorting..." : "Sort"}
+                    Sort
                 </button>
             </div>
         </div>

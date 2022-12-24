@@ -24,11 +24,14 @@
     margin-right: 10px;
 }
 
+.sort-button:hover,
 .array-length-option:hover,
 .speed-option:hover {
     background-color: #444;
 }
 
+.algorithm-select:disabled,
+.sort-button:disabled,
 .array-length-option:disabled,
 .speed-option:disabled {
     background-color: #ccc;
@@ -57,8 +60,4 @@
     padding: 10px 20px;
     border-radius: 4px;
     font-size: 14px;
-}
-
-.sort-button:hover {
-    background-color: #444;
 }
