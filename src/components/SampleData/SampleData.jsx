@@ -8,7 +8,7 @@ export default function SampleData({
 }) {
     return (
         <>
-            <h2>Sample Data</h2>
+            <h2>Sample Data Size</h2>
             <ButtonsGroup
                 onClick={handleArrayLengthOptionClick}
                 activeButton={arrayLengthActiveButton}
