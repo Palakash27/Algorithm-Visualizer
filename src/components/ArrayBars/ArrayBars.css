@@ -3,8 +3,8 @@
     justify-content: center;
     border: 1px solid #333;
     border-radius: 4px;
-    padding: 20px;
-    height: 142px;
+    padding: 5px 20px;
+    height: 165px;
 }
 
 .array-bar {
@@ -23,11 +23,13 @@
 @media (max-width: 900px) {
     .array-bar {
         width: 8px !important;
+        color: transparent !important;
     }
 }
 
 @media (max-width: 450px) {
     .array-bar {
         width: 5px !important;
+        color: transparent !important;
     }
 }

@@ -139,8 +139,12 @@ const Controls = ({ array, setArray }) => {
     const generateArray = useCallback(
         (size) => {
             const newArray = [];
+            const min = 30;
+            const max = 150;
             for (let i = 0; i < size; i++) {
-                newArray.push(Math.floor(Math.random() * 100));
+                newArray.push(
+                    Math.floor(Math.random() * (max - min + 1) + min)
+                );
             }
             setArray(newArray);
 
@@ -310,10 +314,61 @@ const Controls = ({ array, setArray }) => {
 
     // Function to sort the array using quick sort
     const quickSort = async (array, start, end) => {
-        // Remove the sorted class from the bars
+        if (start >= end) {
+            return;
+        }
+
+        let index = await partition(array, start, end);
+        await quickSort(array, start, index - 1);
+        await quickSort(array, index + 1, end);
+
+        // Add the sorted class from the bars
         document.querySelectorAll(".array-bar").forEach((bar) => {
-            bar.classList.remove("sorted");
+            bar.classList.add("sorted");
         });
+    };
+
+    // Function to partition the array
+    const partition = async (array, start, end) => {
+        let pivotIndex = start;
+        let pivotValue = array[end];
+
+        for (let i = start; i < end; i++) {
+            // Highlight the bars being compared
+            document
+                .querySelectorAll(".array-bar")
+                [i].classList.add("highlight");
+            document
+                .querySelectorAll(".array-bar")
+                [end].classList.add("highlight");
+
+            await new Promise((resolve) => setTimeout(resolve, speed));
+            if (array[i] < pivotValue) {
+                // Swap the values
+                [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
+                // Update the state with the sorted array
+                setArray([...array]);
+
+                await new Promise((resolve) => setTimeout(resolve, speed));
+                pivotIndex++;
+            }
+            // Remove the highlight from the bars
+            document
+                .querySelectorAll(".array-bar")
+                [i].classList.remove("highlight");
+            document
+                .querySelectorAll(".array-bar")
+                [end].classList.remove("highlight");
+        }
+
+        // Swap the values
+        [array[pivotIndex], array[end]] = [array[end], array[pivotIndex]];
+        // Update the state with the sorted array
+        setArray([...array]);
+
+        await new Promise((resolve) => setTimeout(resolve, speed));
+
+        return pivotIndex;
     };
 
     // Function to sort the array using merge sort
