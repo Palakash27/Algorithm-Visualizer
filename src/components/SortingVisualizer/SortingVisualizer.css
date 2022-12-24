@@ -14,6 +14,7 @@
 .sorting-visualizer .highlight {
     animation: highlight 0s linear;
     background-color: yellow;
+    color: black !important;
 }
 
 @keyframes highlight {

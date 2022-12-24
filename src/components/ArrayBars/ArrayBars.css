@@ -15,11 +15,6 @@
     margin: 0 1px;
 }
 
-.array-bar .highlight {
-    animation: highlight 0.3s linear;
-    background-color: yellow;
-}
-
 @media (max-width: 900px) {
     .array-bar {
         width: 8px !important;
