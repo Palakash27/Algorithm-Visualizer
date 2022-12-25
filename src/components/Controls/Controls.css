@@ -1,5 +1,6 @@
 .controls-container {
     padding: 20px;
+    width: 100%;
 }
 
 @media (min-width: 1160px) {
@@ -33,6 +34,8 @@
     font-size: 14px;
     margin-right: 10px;
 }
+
+.stop-button:hover,
 .reset-button:hover,
 .sort-button:hover,
 .array-length-option:hover,
@@ -40,6 +43,7 @@
     background-color: #444;
 }
 
+.stop-button:disabled,
 .algorithm-select:disabled,
 .sort-button:disabled,
 .reset-button:disabled,
@@ -51,8 +55,8 @@
 }
 
 .algorithm-select {
-    background-color: #fff;
-    color: #333;
+    background-color: #333;
+    color: #fff;
     border: 1px solid #ccc;
     outline: none;
     cursor: pointer;
@@ -63,7 +67,8 @@
 }
 
 .sort-button,
-.reset-button {
+.reset-button,
+.stop-button {
     background-color: #333;
     color: #fff;
     border: none;
@@ -73,6 +78,7 @@
     border-radius: 4px;
     font-size: 14px;
 }
-.reset-button {
+.reset-button,
+.stop-button {
     margin-left: 10px;
 }
