@@ -11,7 +11,7 @@
     display: inline-block;
     width: 20px;
     background-color: blue;
-    transition: height 0.3s linear;
+    transition: height 0.1s linear;
     margin: 0 1px;
 }
 

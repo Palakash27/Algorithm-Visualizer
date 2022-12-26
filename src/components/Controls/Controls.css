@@ -1,5 +1,5 @@
 .controls-container {
-    padding: 20px;
+    padding: 10px;
     width: 100%;
 }
 
@@ -44,7 +44,6 @@
 }
 
 .stop-button:disabled,
-.algorithm-select:disabled,
 .sort-button:disabled,
 .reset-button:disabled,
 .array-length-option:disabled,
@@ -52,18 +51,6 @@
     background-color: #ccc;
     color: #999;
     cursor: not-allowed;
-}
-
-.algorithm-select {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #ccc;
-    outline: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-right: 10px;
 }
 
 .sort-button,

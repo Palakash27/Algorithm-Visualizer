@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin: 0px 20px;
+    margin: 0px 10px;
 }
 
 .sorting-visualizer .sorted {
@@ -12,13 +12,6 @@
 }
 
 .sorting-visualizer .highlight {
-    animation: highlight 0s linear;
     background-color: yellow;
     color: black !important;
-}
-
-@keyframes highlight {
-    0% {
-        background-color: blue;
-    }
 }

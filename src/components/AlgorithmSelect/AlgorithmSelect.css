@@ -1,0 +1,50 @@
+.algorithm-select-container {
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.algorithm-select-arrow {
+    position: absolute;
+    top: 4px;
+    right: 18px;
+}
+
+.algorithm-select:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.algorithm-select {
+    background-color: #333;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+    min-height: 40px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+.algorithm-select * {
+    /* Add some basic styles for the options */
+    font-size: 14px;
+    color: #888;
+    background-color: white;
+}
+
+.algorithm-select:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+@media (max-width: 450px) {
+    .algorithm-select {
+        width: 100%;
+    }
+}
