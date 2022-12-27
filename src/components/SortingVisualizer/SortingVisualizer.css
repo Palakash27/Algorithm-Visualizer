@@ -13,5 +13,9 @@
 
 .sorting-visualizer .highlight {
     background-color: yellow;
-    color: black !important;
+    color: black;
+}
+.sorting-visualizer .highlight-pivot {
+    background-color: red;
+    color: black;
 }

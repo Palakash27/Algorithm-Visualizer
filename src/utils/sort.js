@@ -169,27 +169,101 @@ const insertionSort = async (array, speed, setArray) => {
 
 //     return pivotIndex;
 // };
+// [10, 16, 8, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = -1
+// j = 0
+// array[j] = 10
+// array[j] < pivot = false
+// [10, 16, 8, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = -1
+// j = 1
+// array[j] = 16
+// array[j] < pivot = false
+// [10, 16, 8, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = -1
+// j = 2
+// array[j] = 8
+// array[j] < pivot = true
+// i = 0
+// [8, 16, 10, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = 0
+// j = 3
+// array[j] = 12
+// array[j] < pivot = false
+// [8, 16, 10, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = 0
+// j = 4
+// array[j] = 15
+// array[j] < pivot = false
+// [8, 16, 10, 12, 15, 6, 3, 9, 5]
+// pivot = 10
+// i = 0
+// j = 5
+// array[j] = 6
+// array[j] < pivot = true
+// i = 1
+// [8, 6, 10, 12, 15, 16, 3, 9, 5]
+// pivot = 10
+// i = 1
+// j = 6
+// array[j] = 3
+// array[j] < pivot = true
+// i = 2
+// [8, 6, 3, 12, 15, 16, 10, 9, 5]
+// pivot = 10
+// i = 2
+// j = 7
+// array[j] = 9
+// array[j] < pivot = true
+// i = 3
+// [8, 6, 3, 9, 15, 16, 10, 12, 5]
+// pivot = 10
+// i = 3
+// j = 8
+// array[j] = 5
+// array[j] < pivot = true
+// i = 4
+// [8, 6, 3, 9, 5, 16, 10, 12, 15]
+// pivot = 10
+// i = 4
+// j = 9
+// [8, 6, 3, 9, 5, 10, 16, 12, 15]
+
+// array[i] = 16
+// array[low] = 10
 
 const quickSort = async (array, setArray, speed) => {
     const partition = async (low, high) => {
         const pivot = array[high];
         let i = low - 1;
+
         for (let j = low; j < high; j++) {
             // Highlight the bars being compared
             document
                 .querySelectorAll(".array-bar")
-                [high].classList.add("highlight");
+                [high].classList.add("highlight-pivot");
             document
                 .querySelectorAll(".array-bar")
                 [j].classList.add("highlight");
+
             await new Promise((resolve) => setTimeout(resolve, speed));
 
             if (array[j] < pivot) {
                 i++;
+                [array[i], array[j]] = [array[j], array[i]];
+
                 document
                     .querySelectorAll(".array-bar")
                     [i].classList.add("highlight");
-                [array[i], array[j]] = [array[j], array[i]];
+                await new Promise((resolve) => setTimeout(resolve, speed));
+
+                setArray([...array]);
+
                 document
                     .querySelectorAll(".array-bar")
                     [i].classList.remove("highlight");
@@ -198,38 +272,55 @@ const quickSort = async (array, setArray, speed) => {
             // Remove the highlight from the bars
             document
                 .querySelectorAll(".array-bar")
-                [high].classList.remove("highlight");
+                [high].classList.remove("highlight-pivot");
             document
                 .querySelectorAll(".array-bar")
                 [j].classList.remove("highlight");
+
+            // Update the state with the sorted array
+            // setArray([...array]);
         }
+        document
+            .querySelectorAll(".array-bar")
+            [high].classList.add("highlight-pivot");
+        document
+            .querySelectorAll(".array-bar")
+            [i + 1].classList.add("highlight");
         await new Promise((resolve) => setTimeout(resolve, speed));
 
         [array[i + 1], array[high]] = [array[high], array[i + 1]];
+        setArray([...array]);
+        // Remove the highlight from the bars
+        document
+            .querySelectorAll(".array-bar")
+            [high].classList.remove("highlight-pivot");
+        document
+            .querySelectorAll(".array-bar")
+            [i + 1].classList.remove("highlight");
+
         return i + 1;
     };
 
     const sort = async (low, high) => {
         if (low < high) {
             const pi = await partition(low, high);
-
             // Highlight the bars being compared
-            document
-                .querySelectorAll(".array-bar")
-                [low].classList.add("highlight");
-            document
-                .querySelectorAll(".array-bar")
-                [high].classList.add("highlight");
+            // document
+            //     .querySelectorAll(".array-bar")
+            //     [pi].classList.add("highlight");
+            // document
+            //     .querySelectorAll(".array-bar")
+            //     [high].classList.add("highlight");
 
             await new Promise((resolve) => setTimeout(resolve, speed));
 
             // Remove the highlight from the bars
-            document
-                .querySelectorAll(".array-bar")
-                [low].classList.remove("highlight");
-            document
-                .querySelectorAll(".array-bar")
-                [high].classList.remove("highlight");
+            // document
+            //     .querySelectorAll(".array-bar")
+            //     [low].classList.remove("highlight");
+            // document
+            //     .querySelectorAll(".array-bar")
+            //     [high].classList.remove("highlight");
 
             // Update the state with the sorted array
             setArray([...array]);

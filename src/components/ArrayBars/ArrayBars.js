@@ -10,8 +10,6 @@ const ArrayBars = ({ array }) => {
                     style={{
                         width: `${Math.abs(60 - array.length)}px`,
                         height: `${value}px`,
-                        textAlign: "center",
-                        color: "white",
                     }}
                 >
                     {array.length <= 20 && value}

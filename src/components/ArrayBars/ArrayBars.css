@@ -13,6 +13,8 @@
     background-color: blue;
     transition: height 0.1s linear;
     margin: 0 1px;
+    text-align: center;
+    color: white;
 }
 
 @media (max-width: 900px) {
