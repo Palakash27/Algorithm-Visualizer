@@ -8,7 +8,10 @@ const ArrayBars = ({ array }) => {
                     key={index}
                     className="array-bar"
                     style={{
-                        width: `${Math.abs(60 - array.length)}px`,
+                        width: `${
+                            (window.innerWidth - array.length * 2 - 60) /
+                            array.length
+                        }px`,
                         height: `${value}px`,
                     }}
                 >

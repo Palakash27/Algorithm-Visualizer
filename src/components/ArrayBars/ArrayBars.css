@@ -19,14 +19,12 @@
 
 @media (max-width: 900px) {
     .array-bar {
-        width: 8px !important;
         color: transparent !important;
     }
 }
 
-@media (max-width: 450px) {
-    .array-bar {
-        width: 5px !important;
-        color: transparent !important;
+@media (min-width: 1160px) {
+    .array-bars-container {
+        width: 1150px;
     }
 }
