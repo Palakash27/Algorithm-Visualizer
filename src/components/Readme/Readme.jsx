@@ -11,7 +11,7 @@ const Readme = ({ onHideReadme }) => {
         if (localStorage.getItem("readmeDisplayed") === "true") {
             onHideReadme();
         }
-    }, []);
+    }, [onHideReadme]);
 
     useEffect(() => {
         // Make an HTTP request to the server to fetch the readme.md file using the fetch API

@@ -150,9 +150,6 @@ const quickSort = async (array, setArray, speed) => {
             document
                 .querySelectorAll(".array-bar")
                 [j].classList.remove("highlight");
-
-            // Update the state with the sorted array
-            // setArray([...array]);
         }
         document
             .querySelectorAll(".array-bar")
@@ -178,23 +175,7 @@ const quickSort = async (array, setArray, speed) => {
     const sort = async (low, high) => {
         if (low < high) {
             const pi = await partition(low, high);
-            // Highlight the bars being compared
-            // document
-            //     .querySelectorAll(".array-bar")
-            //     [pi].classList.add("highlight");
-            // document
-            //     .querySelectorAll(".array-bar")
-            //     [high].classList.add("highlight");
-
             await new Promise((resolve) => setTimeout(resolve, speed));
-
-            // Remove the highlight from the bars
-            // document
-            //     .querySelectorAll(".array-bar")
-            //     [low].classList.remove("highlight");
-            // document
-            //     .querySelectorAll(".array-bar")
-            //     [high].classList.remove("highlight");
 
             // Update the state with the sorted array
             setArray([...array]);
@@ -233,13 +214,6 @@ const mergeSort = async (array, speed, setArray) => {
                 [rightIndex].classList.add("highlight");
 
             await new Promise((resolve) => setTimeout(resolve, speed));
-            if (left[leftIndex] < right[rightIndex]) {
-                resultArray.push(left[leftIndex]);
-                leftIndex++;
-            } else {
-                resultArray.push(right[rightIndex]);
-                rightIndex++;
-            }
             // Remove the highlight from the bars
             document
                 .querySelectorAll(".array-bar")
@@ -247,11 +221,22 @@ const mergeSort = async (array, speed, setArray) => {
             document
                 .querySelectorAll(".array-bar")
                 [rightIndex].classList.remove("highlight");
+            if (left[leftIndex] < right[rightIndex]) {
+                resultArray.push(left[leftIndex]);
+                leftIndex++;
+            } else {
+                resultArray.push(right[rightIndex]);
+                rightIndex++;
+            }
         }
 
-        return resultArray
+        const result = resultArray
             .concat(left.slice(leftIndex))
             .concat(right.slice(rightIndex));
+
+        console.log(`result: ${result}`);
+
+        return result;
     };
 
     if (array.length <= 1) {
@@ -261,9 +246,11 @@ const mergeSort = async (array, speed, setArray) => {
     const middle = Math.floor(array.length / 2);
     const left = array.slice(0, middle);
     const right = array.slice(middle);
+    console.log(`left: ${left} and right: ${right}`);
+    const leftSorted = await mergeSort(left, speed, setArray);
+    const rightSorted = await mergeSort(right, speed, setArray);
 
-    const leftSorted = await mergeSort(left, speed);
-    const rightSorted = await mergeSort(right, speed);
+    console.log(`leftSorted: ${leftSorted} and rightSorted: ${rightSorted}`);
 
     return await merge(leftSorted, rightSorted, speed);
 };
@@ -291,7 +278,9 @@ export const sort = async (
             await quickSort(array, setArray, speed);
             break;
         case "mergeSort":
-            await mergeSort(array, speed, setArray);
+            console.log(`array: ${array}`);
+            let sortedArray = await mergeSort(array, speed, setArray);
+            setArray([...sortedArray]);
             break;
         default:
             break;

@@ -6,9 +6,11 @@ import SampleData from "../SampleData/SampleData";
 import SortButton from "../SortButton/SortButton";
 import "./Controls.css";
 
+import { INITIAL_CONFIG } from "../../utils/enums";
+
 const Controls = ({ array, setArray, generateArray }) => {
-    const [speed, setSpeed] = useState(250);
-    const [algorithm, setAlgorithm] = useState("bubbleSort");
+    const [speed, setSpeed] = useState(null);
+    const [algorithm, setAlgorithm] = useState(INITIAL_CONFIG.ALGORITHM);
     const [isSorting, setIsSorting] = useState(false);
     const [arrayLengthActiveButton, setArrayLengthActiveButton] =
         useState(null);
@@ -41,8 +43,8 @@ const Controls = ({ array, setArray, generateArray }) => {
     );
 
     useEffect(() => {
-        handleArrayLengthOptionClick(20);
-        handleSpeedOptionClick(500);
+        handleArrayLengthOptionClick(INITIAL_CONFIG.ARRAY_LENGTH);
+        handleSpeedOptionClick(INITIAL_CONFIG.SPEED);
     }, [handleArrayLengthOptionClick]);
 
     const handleAlgorithmChange = (e) => {
